@@ -1,11 +1,19 @@
-import { Award, GraduationCap } from 'lucide-react'
+import Image from 'next/image'
+import { Award, BadgeCheck, GraduationCap, UserRound } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { SectionHeading } from '@/components/section-heading'
 
-const doctors = [
+type Doctor = {
+  name: string
+  role: string
+  degrees: string
+  photo?: string
+  stats: { value: string; label: string }[]
+}
+
+const doctors: Doctor[] = [
   {
     name: 'Dr. Jainendra Rahud',
-    initials: 'JR',
     role: 'Phacorefractive & Vitreoretinal Surgeon',
     degrees: 'MBBS, MS, FRF, FICS',
     stats: [
@@ -16,7 +24,6 @@ const doctors = [
   },
   {
     name: 'Dr. Tejashwini Rahud (More)',
-    initials: 'TR',
     role: 'Consultant Eye & Phacorefractive Surgeon',
     degrees: 'MS, DOMS',
     stats: [
@@ -25,6 +32,47 @@ const doctors = [
     ],
   },
 ]
+
+function DoctorPortrait({ name, photo }: { name: string; photo?: string }) {
+  return (
+    <div className="relative shrink-0">
+      <div
+        aria-hidden="true"
+        className="absolute -inset-2 rounded-[2rem] bg-gradient-to-br from-teal/40 via-accent to-primary/30 opacity-80 blur-md transition-opacity duration-500 group-hover:opacity-100"
+      />
+      <div className="relative size-36 overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-accent via-secondary to-card p-1 ring-1 ring-border shadow-xl shadow-primary/15 sm:size-40">
+        <div className="relative flex size-full items-end justify-center overflow-hidden rounded-[1.5rem] bg-gradient-to-b from-secondary to-accent">
+          {photo ? (
+            <Image
+              src={photo}
+              alt={`Portrait of ${name}`}
+              fill
+              sizes="160px"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          ) : (
+            <>
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.8),transparent_70%)]"
+              />
+              <UserRound
+                role="img"
+                aria-label={`Photo of ${name} coming soon`}
+                strokeWidth={1.25}
+                className="relative -mb-3 size-32 text-primary/35 transition-transform duration-700 group-hover:scale-105"
+              />
+            </>
+          )}
+        </div>
+      </div>
+      <span className="absolute -bottom-2 -right-2 flex size-10 items-center justify-center rounded-full border-4 border-card bg-teal text-primary-foreground shadow-md">
+        <BadgeCheck className="size-5" aria-hidden="true" />
+        <span className="sr-only">Verified specialist</span>
+      </span>
+    </div>
+  )
+}
 
 export function Doctors() {
   return (
@@ -47,20 +95,20 @@ export function Doctors() {
                   aria-hidden="true"
                   className="absolute -right-16 -top-16 size-48 rounded-full bg-accent opacity-70 blur-2xl transition-opacity group-hover:opacity-100"
                 />
-                <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center">
-                  <div
-                    aria-hidden="true"
-                    className="flex size-24 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-teal font-display text-3xl font-semibold text-primary-foreground shadow-lg shadow-primary/25"
-                  >
-                    {doc.initials}
-                  </div>
-                  <div>
-                    <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground">{doc.name}</h3>
-                    <p className="mt-1 flex items-center gap-2 text-sm font-medium text-teal">
-                      <Award className="size-4" aria-hidden="true" />
+                <div className="relative flex flex-col items-center gap-8 text-center sm:flex-row sm:items-center sm:text-left">
+                  <DoctorPortrait name={doc.name} photo={doc.photo} />
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                      Rahud Eye Center
+                    </p>
+                    <h3 className="mt-2 text-balance font-display text-2xl font-semibold tracking-tight text-foreground">
+                      {doc.name}
+                    </h3>
+                    <p className="mt-2 flex items-start justify-center gap-2 text-sm font-medium text-teal sm:justify-start">
+                      <Award className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
                       {doc.role}
                     </p>
-                    <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+                    <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
                       <GraduationCap className="size-4" aria-hidden="true" />
                       {doc.degrees}
                     </p>
