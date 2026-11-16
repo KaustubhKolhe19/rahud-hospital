@@ -14,8 +14,8 @@ type Doctor = {
 const doctors: Doctor[] = [
   {
     name: 'Dr. Jainendra Rahud',
-    role: 'Phacorefractive & Vitreoretinal Surgeon',
-    degrees: 'MBBS, MS, FRF, FICS',
+    role: 'Phacorefractive & Vitreoretinal Surgeon & Rop Specialist',
+    degrees: 'MBBS, MS, FRF (Ahmedabad), FICS (U.S.A.)',
     photo: '/images/doctors/jainendra.jpg',
     stats: [
       { value: '20+', label: 'Years of experience' },
@@ -26,7 +26,7 @@ const doctors: Doctor[] = [
   {
     name: 'Dr. Tejaswini Rahud (More)',
     role: 'Consultant Eye & Phacorefractive Surgeon',
-    degrees: 'MS, DOMS',
+    degrees: 'MS, DOMS (Netra)',
     photo: '/images/doctors/tejashwini.jpg',
     stats: [
       { value: '10+', label: 'Years of experience' },
@@ -107,14 +107,29 @@ export function Doctors() {
                     <h3 className="mt-2 text-balance font-display text-2xl font-semibold tracking-tight text-foreground">
                       {doc.name}
                     </h3>
-                    <p className="mt-2 flex items-start justify-center gap-2 text-sm font-medium text-teal sm:justify-start">
-                      <Award className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-                      {doc.role}
-                    </p>
-                    <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
-                      <GraduationCap className="size-4" aria-hidden="true" />
-                      {doc.degrees}
-                    </p>
+                    <dl className="mt-4 flex flex-col gap-3 text-left">
+                      <div className="flex items-start gap-2.5">
+                        <Award className="mt-0.5 size-4 shrink-0 text-teal" aria-hidden="true" />
+                        <div className="min-w-0">
+                          <dt className="sr-only">Specialization</dt>
+                          <dd className="text-pretty text-sm font-medium leading-relaxed text-teal">
+                            {doc.role}
+                          </dd>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2.5">
+                        <GraduationCap
+                          className="mt-0.5 size-4 shrink-0 text-muted-foreground"
+                          aria-hidden="true"
+                        />
+                        <div className="min-w-0">
+                          <dt className="sr-only">Education</dt>
+                          <dd className="text-pretty text-[0.8125rem] leading-relaxed text-muted-foreground">
+                            {doc.degrees}
+                          </dd>
+                        </div>
+                      </div>
+                    </dl>
                   </div>
                 </div>
 
