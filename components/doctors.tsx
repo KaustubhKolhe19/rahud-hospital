@@ -16,6 +16,7 @@ const doctors: Doctor[] = [
     name: 'Dr. Jainendra Rahud',
     role: 'Phacorefractive & Vitreoretinal Surgeon',
     degrees: 'MBBS, MS, FRF, FICS',
+    photo: '/images/doctors/jainendra.jpg',
     stats: [
       { value: '20+', label: 'Years of experience' },
       { value: '80,000+', label: 'Cataract surgeries' },
@@ -26,6 +27,7 @@ const doctors: Doctor[] = [
     name: 'Dr. Tejashwini Rahud (More)',
     role: 'Consultant Eye & Phacorefractive Surgeon',
     degrees: 'MS, DOMS',
+    photo: '/images/doctors/tejashwini.jpg',
     stats: [
       { value: '10+', label: 'Years of experience' },
       { value: '20,000+', label: 'Cataract surgeries' },
@@ -47,8 +49,9 @@ function DoctorPortrait({ name, photo }: { name: string; photo?: string }) {
               src={photo}
               alt={`Portrait of ${name}`}
               fill
-              sizes="160px"
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(min-width: 640px) 160px, 144px"
+              quality={90}
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
             />
           ) : (
             <>
