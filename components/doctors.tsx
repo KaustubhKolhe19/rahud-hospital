@@ -24,7 +24,7 @@ const doctors: Doctor[] = [
     ],
   },
   {
-    name: 'Dr. Tejashwini Rahud (More)',
+    name: 'Dr. Tejaswini Rahud (More)',
     role: 'Consultant Eye & Phacorefractive Surgeon',
     degrees: 'MS, DOMS',
     photo: '/images/doctors/tejashwini.jpg',
